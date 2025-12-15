@@ -1,0 +1,414 @@
+/* =====================================================
+   RESET & DASAR
+===================================================== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #e6ecff;
+
+    background: url('https://cdn.pixabay.com/photo/2017/03/27/15/14/forest-2179318_1280.jpg')
+        no-repeat center center fixed;
+    background-size: cover;
+    background-color: #020b16;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* PENTING */
+    text-align: center;
+    min-height: 100vh;
+}
+
+/* =====================================================
+   BACKGROUND EFFECT (DI BAWAH SEMUA KONTEN)
+===================================================== */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 35, 0.75);
+    z-index: 0;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 15, 35, 0.45);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.fog {
+    position: fixed;
+    inset: 0;
+    width: 200%;
+    background: url('fog.png') repeat-x;
+    opacity: 0.25;
+    animation: fogMove 50s linear infinite;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes fogMove {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* =====================================================
+   KONTEN UTAMA (DI ATAS BACKGROUND)
+===================================================== */
+nav,
+header,
+main,
+section,
+.content-box,
+.hobi-card,
+.skill-box,
+.sertifikat-grid,
+.sertifikat-card,
+.kontak-grid,
+.skew-card {
+    position: relative;
+    z-index: 10;
+}
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    padding: 20px;
+    background: rgba(0, 10, 25, 0.6);
+    backdrop-filter: blur(6px);
+}
+
+nav a {
+    color: #9dbfff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #fff;
+    text-shadow: 0 0 12px #6ea6ff;
+    transform: translateY(-2px);
+}
+
+/* =====================================================
+   CONTENT BOX (JUDUL)
+===================================================== */
+.content-box {
+    max-width: 750px;
+    margin: 25px auto;
+    padding: 28px;
+    background: rgba(0, 0, 35, 0.55);
+    backdrop-filter: blur(6px);
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(80, 130, 255, 0.4);
+}
+
+/* =====================================================
+   FOTO PROFIL
+===================================================== */
+.profile {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #8bb4ff;
+    box-shadow: 0 0 25px rgba(130, 170, 255, 0.8);
+    margin: 25px auto;
+}
+
+/* =====================================================
+   GALERI & SERTIFIKAT
+===================================================== */
+.sertifikat-grid {
+    max-width: 900px;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.sertifikat-card {
+    background: rgba(0, 0, 40, 0.55);
+    padding: 18px;
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 20px rgba(90, 140, 255, 0.45);
+    transition: 0.4s ease;
+}
+
+.sertifikat-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.sertifikat-card:hover {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 0 30px rgba(130, 180, 255, 0.9);
+}
+
+/* =====================================================
+   GALERI ANIMASI ANGIN (AMAN)
+===================================================== */
+.wind-item {
+    opacity: 1; /* PASTI TAMPIL */
+    animation: windSway 6s ease-in-out infinite;
+}
+
+@keyframes windSway {
+    0%   { transform: translateX(0) rotate(0deg); }
+    25%  { transform: translateX(-4px) rotate(-1deg); }
+    50%  { transform: translateX(3px) rotate(1deg); }
+    75%  { transform: translateX(-3px) rotate(-1deg); }
+    100% { transform: translateX(0) rotate(0deg); }
+}
+
+/* =====================================================
+   SKILL
+===================================================== */
+.skill-box {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 30px;
+    background: rgba(0, 0, 35, 0.55);
+    border-radius: 18px;
+    box-shadow: 0 0 25px rgba(80, 130, 255, 0.45);
+}
+
+.skill span {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.skill-bar {
+    height: 12px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.skill-level {
+    height: 100%;
+    background: linear-gradient(90deg, #6ea6ff, #a3c8ff);
+    border-radius: 10px;
+}
+.skill-card {
+    background: rgba(0, 0, 45, 0.55);
+    padding: 22px;
+    border-radius: 18px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 25px rgba(80, 140, 255, 0.45);
+    margin-bottom: 22px;
+    position: relative;
+    overflow: hidden;
+
+    opacity: 0;
+    transform: translateY(30px);
+    animation: skillFadeUp 1.2s ease forwards;
+}
+
+/* delay berbeda tiap skill */
+.skill-card:nth-child(1) { animation-delay: 0.2s; }
+.skill-card:nth-child(2) { animation-delay: 0.4s; }
+.skill-card:nth-child(3) { animation-delay: 0.6s; }
+.skill-card:nth-child(4) { animation-delay: 0.8s; }
+
+@keyframes skillFadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+.skill-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    padding: 2px;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        #6ea6ff,
+        #9fd3ff,
+        transparent
+    );
+    opacity: 0.6;
+animation: borderGlow 4s linear infinite;
+
+-webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+-webkit-mask-composite: xor;
+mask-composite: exclude;
+
+}
+
+@keyframes borderGlow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+.skill-card:hover {
+    transform: translateY(-10px) scale(1.04);
+    box-shadow: 0 0 35px rgba(140, 190, 255, 0.95);
+}
+.skill-level {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #6ea6ff, #b7d7ff);
+    border-radius: 10px;
+    animation: fillSkill 2.2s ease forwards;
+    box-shadow: 0 0 18px rgba(120, 170, 255, 0.8);
+}
+
+@keyframes fillSkill {
+    to {
+        width: var(--level);
+    }
+}
+.skill-card {
+    animation:
+        skillFadeUp 1.2s ease forwards,
+        floatSoft 6s ease-in-out infinite;
+}
+
+@keyframes floatSoft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+
+
+/* =====================================================
+   KONTAK
+===================================================== */
+.kontak-grid {
+    max-width: 750px;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.skew-card {
+    background: rgba(0, 0, 35, 0.5);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 60, 140, 0.5);
+    transition: 0.4s;
+}
+
+.skew-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 28px rgba(120, 170, 255, 0.9);
+}
+
+/* =====================================================
+   GLOBAL IMAGE HOVER
+===================================================== */
+img {
+    transition: 0.4s ease;
+}
+
+img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 22px rgba(130, 170, 255, 0.8);
+}
+/* ===============================
+   FOTO PROFIL KONTAK (BULAT SEMPURNA)
+================================ */
+
+/* wrapper foto (opsional tapi bikin rapi) */
+.kontak-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* foto profil bulat */
+.kontak-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;          
+    object-fit: cover;           
+    border: 3px solid #8bb4ff;
+    box-shadow: 0 0 20px rgba(120, 170, 255, 0.8);
+    background: #000;
+
+    transition: 0.4s ease;
+}
+
+/* efek gerak saat disentuh */
+.kontak-card:hover .kontak-img {
+    transform: scale(1.08) rotate(1deg);
+    box-shadow: 0 0 30px rgba(150, 190, 255, 1);
+}
+
+/* === INDEX CENTER === */
+.index-center {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+}
+
+/* CARD INDEX */
+.index-card {
+    max-width: 680px;
+    background: rgba(0, 0, 40, 0.55);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 28px rgba(90, 150, 255, 0.45);
+    animation: fadeUpIndex 1.4s ease forwards;
+    text-align: center;
+}
+
+/* teks paragraf */
+.index-text {
+    line-height: 1.9;
+    font-size: 15px;
+    margin-bottom: 22px;
+    animation: textFade 2s ease forwards;
+}
+
+/* animasi muncul */
+@keyframes fadeUpIndex {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes textFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* efek hover */
+.index-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 0 35px rgba(140, 190, 255, 0.9);
+}
+
